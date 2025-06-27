@@ -123,7 +123,7 @@ the _start and _send functions assume they are valid.
 static lgw_context_t lgw_context = {
     .is_started = false,
     .board_cfg.com_type = LGW_COM_SPI,
-    .board_cfg.com_path = "/dev/spidev0.0",
+    .board_cfg.com_path = "/dev/spidev1.1",
     .board_cfg.lorawan_public = true,
     .board_cfg.clksrc = 0,
     .board_cfg.full_duplex = false,
@@ -185,7 +185,7 @@ static lgw_context_t lgw_context = {
     },
     .sx1261_cfg = {
         .enable = false,
-        .spi_path = "/dev/spidev0.1",
+        .spi_path = "/dev/spidev0.0",
         .rssi_offset = 0,
         .lbt_conf = {
             .rssi_target = 0,
@@ -1091,7 +1091,7 @@ int lgw_start(void) {
 
     /* Configure the pseudo-random generator (For Debug) */
     dbg_init_random();
-
+#if 0
     if (CONTEXT_COM_TYPE == LGW_COM_SPI) {
         /* Find the temperature sensor on the known supported ports */
         for (i = 0; i < (int)(sizeof I2C_PORT_TEMP_SENSOR); i++) {
@@ -1170,7 +1170,7 @@ int lgw_start(void) {
             return LGW_HAL_ERROR;
         }
     }
-
+#endif 
     /* Set CONFIG_DONE GPIO to 1 (turn on the corresponding LED) */
     err = sx1302_set_gpio(0x01);
     if (err != LGW_REG_SUCCESS) {
@@ -1220,7 +1220,7 @@ int lgw_stop(void) {
         printf("ERROR: failed to disconnect concentrator\n");
         err = LGW_HAL_ERROR;
     }
-
+#if 0
     if (CONTEXT_COM_TYPE == LGW_COM_SPI) {
         DEBUG_MSG("INFO: Closing I2C for temperature sensor\n");
         x = i2c_linuxdev_close(ts_fd);
@@ -1238,7 +1238,7 @@ int lgw_stop(void) {
             }
         }
     }
-
+#endif 
     CONTEXT_STARTED = false;
 
     DEBUG_PRINTF(" --- %s\n", "OUT");
@@ -1287,12 +1287,13 @@ int lgw_receive(uint8_t max_pkt, struct lgw_pkt_rx_s *pkt_data) {
     }
 
     /* Apply RSSI temperature compensation */
+/*
     res = lgw_get_temperature(&current_temperature);
     if (res != LGW_I2C_SUCCESS) {
         printf("ERROR: failed to get current temperature\n");
         return LGW_HAL_ERROR;
     }
-
+*/
     /* Iterate on the RX buffer to get parsed packets */
     for (nb_pkt_found = 0; nb_pkt_found < ((nb_pkt_fetched <= max_pkt) ? nb_pkt_fetched : max_pkt); nb_pkt_found++) {
         /* Get packet and move to next one */

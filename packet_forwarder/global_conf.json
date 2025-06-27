@@ -1,0 +1,138 @@
+
+{
+  "SX130x_conf": {
+      "com_type": "SPI",
+      "com_path": "/dev/spidev1.1",
+      "lorawan_public": true,
+      "clksrc": 0,
+      "antenna_gain": 3, /* antenna gain, in dBi */
+      "full_duplex": false,
+      "fine_timestamp": {
+  "enable": false,
+  "mode": "all_sf" /* high_capacity or all_sf */
+      },
+"radio_0": {
+  "enable": true,	
+  "type": "SX1250",
+  "freq": 921800000,
+  "rssi_offset": -207,
+  "tx_enable": true,
+  "tx_freq_min": 915000000,
+  "tx_freq_max": 928000000,
+  "tx_gain_lut":[
+  {"rf_power": 0,  "pa_gain": 0, "pwr_idx": 0},
+              {"rf_power": 12, "pa_gain": 0, "pwr_idx": 15},
+              {"rf_power": 13, "pa_gain": 0, "pwr_idx": 16},
+              {"rf_power": 14, "pa_gain": 0, "pwr_idx": 17},
+              {"rf_power": 15, "pa_gain": 0, "pwr_idx": 19},
+              {"rf_power": 16, "pa_gain": 0, "pwr_idx": 20},
+              {"rf_power": 17, "pa_gain": 0, "pwr_idx": 22},
+              {"rf_power": 18, "pa_gain": 1, "pwr_idx": 1},
+              {"rf_power": 19, "pa_gain": 1, "pwr_idx": 2},
+              {"rf_power": 20, "pa_gain": 1, "pwr_idx": 3},
+              {"rf_power": 21, "pa_gain": 1, "pwr_idx": 4},
+              {"rf_power": 22, "pa_gain": 1, "pwr_idx": 5},
+              {"rf_power": 23, "pa_gain": 1, "pwr_idx": 6},
+              {"rf_power": 24, "pa_gain": 1, "pwr_idx": 9}
+          ]
+},
+"radio_1": {
+  "enable": true,
+  "type": "SX1250",
+  "freq": 922400000,
+  "rssi_offset": -207,
+  "tx_enable": false
+},
+"chan_multiSF_All": {"spreading_factor_enable": [ 5, 6, 7, 8, 9, 10, 11, 12 ]},
+"chan_multiSF_0": {
+  "enable": true,
+  "radio": 0,
+  "if": -400000
+},
+"chan_multiSF_1": {
+  "enable": true,
+  "radio": 0,
+  "if": -200000
+},
+"chan_multiSF_2": {
+  "enable": true,
+  "radio": 0,
+  "if": 0
+},
+"chan_multiSF_3": {
+  "enable": true,
+  "radio": 0,
+  "if": 200000
+},
+"chan_multiSF_4": {
+  "enable": true,
+  "radio": 1,
+  "if": -200000
+},
+"chan_multiSF_5": {
+  "enable": true,
+  "radio": 1,
+  "if": 0
+},
+"chan_multiSF_6": {
+  "enable": true,
+  "radio": 1,
+  "if": 200000
+},
+"chan_multiSF_7": {
+  "enable": true,
+  "radio": 1,
+  "if": 400000
+},
+"chan_Lora_std": {
+  "desc": "Lora MAC, 250kHz, SF7, 922.1 MHz",
+  "enable": true,
+  "radio": 1,
+  "if":  -300000,
+  "bandwidth": 250000,
+  "spread_factor": 7
+},
+"chan_FSK": {
+  "desc": "FSK 50kbps, 921.7 MHz",
+  "enable": true,
+  "radio": 0,
+  "if": -100000
+}
+},
+
+  "gateway_conf": {
+      "gateway_ID": "020066FFFEC2CFD0",
+      /* change with default server address/ports */
+      "serv_port_up": 1700,
+      "serv_port_down": 1700,
+      "server_address": "localhost",
+      /* adjust the following parameters for your network */
+      "keepalive_interval": 5,
+      "stat_interval": 30,
+      "push_timeout_ms": 1000,
+      /* forward only valid packets */
+      "forward_crc_valid": true,
+      "forward_crc_error": false,
+      "forward_crc_disabled": false,
+      /* GPS configuration */
+"gps": true,
+      "gps_tty_path": "/dev/ttyS5",
+      "servers": [
+      {
+          "gateway_ID": "020066FFFEC2CFD0",
+          "server_address": "localhost",
+          "serv_port_up": 1700,
+          "serv_port_down": 1700,
+          "serv_enabled": true
+      }
+      ]
+  },
+
+  "debug_conf": {
+      "ref_payload":[
+          {"id": "0xCAFE1234"},
+          {"id": "0xCAFE2345"}
+      ],
+      "log_file": "loragw_hal.log"
+  }
+}
