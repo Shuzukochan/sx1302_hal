@@ -114,9 +114,6 @@
       "forward_crc_valid": true,
       "forward_crc_error": false,
       "forward_crc_disabled": false,
-      /* GPS configuration */
-"gps": true,
-      "gps_tty_path": "/dev/ttyS5",
       "servers": [
       {
           "gateway_ID": "020066FFFEC2CFD0",
